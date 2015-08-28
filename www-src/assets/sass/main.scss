@@ -1,0 +1,9 @@
+* { 
+	background: red;
+}
+div { 
+	display: block;
+	float: left;
+}
+
+@import "test-external";
