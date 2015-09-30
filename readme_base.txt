@@ -26,9 +26,6 @@ Pour minifier le html de distribution
 https://github.com/sindresorhus/time-grunt
 Affiche le temps d'exécution des tâches grunt
 
-<<<<<<< HEAD
-
-
 ###
 
 NO SUCCESS:
@@ -48,6 +45,3 @@ Pour compiler des pages html à partir de partials
 https://github.com/brainshave/grunt-zetzer
 Pour compiler des pages html à partir de partials
 --> no tpl inheritance
-=======
-###
->>>>>>> 88cd0c7c0af016da61a61864828b0daa5e517078
