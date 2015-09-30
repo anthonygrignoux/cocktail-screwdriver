@@ -5,38 +5,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     // -------------------------------------------------------
-    // grunt-zetzer
-    zetzer: {
-      options: {
-        // Task-specific options go here.
-      },
-      your_target: {
-        // Target-specific file lists and/or options go here.
-      },
-    },
-    // -------------------------------------------------------
-    // grunt-flats
-    flats: {
-      test: {
-        options: {
-          basePath: 'www-src/flats',
-          layoutPath: 'pages',
-          partialPath: 'modules',
-          masterSrc: 'master/master.html',
-          destPath: 'www-test/pages'
-        }
-      },
-      dist: {
-        options: {
-          basePath: 'www-src/flats',
-          layoutPath: 'pages',
-          partialPath: 'modules',
-          masterSrc: 'master/master.html',
-          destPath: 'www-dist/pages'
-        }
-      }
-    },
-    // -------------------------------------------------------
     // grunt-sass
     sass: {
       test: {
@@ -46,7 +14,7 @@ module.exports = function(grunt) {
         },
         files: {
             'www-test/assets/css/main.css': 'www-src/assets/sass/main.scss'
-        }          
+        }
       },
       dist: {
         options: {
@@ -55,34 +23,52 @@ module.exports = function(grunt) {
         },
         files: {
             'www-dist/assets/css/main.css': 'www-src/assets/sass/main.scss'
-        }          
+        }
       }
     },
     // -------------------------------------------------------
     // html-min
-    htmlmin: {                                     
-      dist: {                                      
-        options: {                                 
+    htmlmin: {
+      dist: {
+        options: {
           removeComments: true,
           collapseWhitespace: true,
           conservativeCollapse: true,
           minifyCSS: true
-        },                       
-        expand: true,            
+        },
+        expand: true,
         cwd: 'www-dist/pages/',
-        src: ['page.html'],
+        src: ['**/*.html'],
         dest: 'www-dist/pages/'
       },
-      test: {                                      
-        options: {                                 
+      test: {
+        options: {
           collapseWhitespace: true,
           conservativeCollapse: true,
           minifyCSS: true
-        },                       
-        expand: true,            
+        },
+        expand: true,
         cwd: 'www-test/pages/',
-        src: ['page.html'],
+        src: ['**/*.html'],
         dest: 'www-test/pages/'
+      }
+    },
+    // -------------------------------------------------------
+    // grunt-webpack
+    webpack: {
+      test: {
+        // webpack options
+        entry: "./www-src/assets/scripts/main.js",
+        output: {
+            path: "www-test/assets/scripts",
+            filename: "bundle.js",
+        },
+        stats: {
+            // Configure the console output
+            colors: false,
+            modules: true,
+            reasons: true
+        },
       }
     },
     // -------------------------------------------------------
@@ -152,10 +138,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-flats');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-webpack');
+  grunt.loadNpmTasks('grunt-template-html');
 
-  grunt.registerTask('default', ['flats:test']);
+  grunt.registerTask('default', ['build:test']);
 
-  grunt.registerTask('build:test', ['flats:test','sass:test']);  
-  grunt.registerTask('build:dist', ['flats:dist','htmlmin:dist','sass:dist']);  
+  grunt.registerTask('build:test', ['nunjucks:test','sass:test']);
+  grunt.registerTask('build:dist', ['flats:dist','htmlmin:dist','sass:dist']);
 
 };

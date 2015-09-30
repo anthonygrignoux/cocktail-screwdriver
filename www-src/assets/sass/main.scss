@@ -1,9 +1,13 @@
-* { 
+* {
 	background: red;
 }
-div { 
+div {
 	display: block;
 	float: left;
 }
 
 @import "test-external";
+
+.stuff {
+	background: red;
+}
