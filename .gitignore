@@ -1,4 +1,8 @@
 node_modules/
 www-dist/
 www-test/
+<<<<<<< HEAD
 bower_components/
+=======
+/.project
+>>>>>>> 88cd0c7c0af016da61a61864828b0daa5e517078

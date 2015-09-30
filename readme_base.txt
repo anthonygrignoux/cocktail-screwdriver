@@ -1,5 +1,7 @@
 Tools :
 
+["global" = doit être installé globalement, "save-dev" sera installé à l'exécution de npm install]
+
 * Bower (global)
 http://bower.io/
 Installation des librairies JS
@@ -24,6 +26,7 @@ Pour minifier le html de distribution
 https://github.com/sindresorhus/time-grunt
 Affiche le temps d'exécution des tâches grunt
 
+<<<<<<< HEAD
 
 
 ###
@@ -45,3 +48,6 @@ Pour compiler des pages html à partir de partials
 https://github.com/brainshave/grunt-zetzer
 Pour compiler des pages html à partir de partials
 --> no tpl inheritance
+=======
+###
+>>>>>>> 88cd0c7c0af016da61a61864828b0daa5e517078
