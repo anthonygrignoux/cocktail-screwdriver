@@ -13,9 +13,15 @@
   </head>
   <body>
 
-    {% block zone-main %}
+    {% block zone_head %}
+      {% include "../modules/header/header.html" %}
+    {% endblock %}
+    {% block zone_main %}
       <p>Nothing should be here</p>
-    {% end block %}
+    {% endblock %}
+    {% block zone_footer %}
+      {% include "../modules/footer/footer.html" %}
+    {% endblock %}
 
     <script type="text/javascript" src="../assets/scripts/bundle.js"></script>
   </body>

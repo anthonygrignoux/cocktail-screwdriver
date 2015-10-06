@@ -53,15 +53,41 @@ module.exports = function(grunt) {
         dest: 'www-test/pages/'
       }
     },
+    nunjucks: {
+      options: {
+         data: grunt.file.readJSON('data.json'),
+      },
+      render: {
+        files: [
+           {
+              expand: true,
+              cwd: "www-src/pages/",
+              src: "*.html",
+              dest: "www-test/pages/",
+              ext: ".html"
+           }
+        ]
+      }
+    },
+    prettify: {
+      options: {},
+      test: {
+        expand: true,
+        cwd: 'www-test/pages',
+        ext: '.html',
+        src: ['*.html'],
+        dest: 'www-test/pages'
+      }
+    },
     // -------------------------------------------------------
     // grunt-webpack
     webpack: {
       test: {
         // webpack options
-        entry: "./www-src/assets/scripts/main.js",
+        entry: './www-src/assets/scripts/main.js',
         output: {
-            path: "www-test/assets/scripts",
-            filename: "bundle.js",
+            path: 'www-test/assets/scripts',
+            filename: 'bundle.js',
         },
         stats: {
             // Configure the console output
@@ -76,74 +102,73 @@ module.exports = function(grunt) {
     modernizr: {
 
       dist: {
-          // [REQUIRED] Path to the build you're using for development.
-          "devFile" : "lib/modernizr-dev.js",
+        // [REQUIRED] Path to the build you're using for development.
+        'devFile' : 'lib/modernizr-dev.js',
 
-          // Path to save out the built file.
-          "outputFile" : "build/modernizr-custom.js",
+        // Path to save out the built file.
+        'outputFile' : 'build/modernizr-custom.js',
 
-          // Based on default settings on http://modernizr.com/download/
-          "extra" : {
-              "shiv" : true,
-              "printshiv" : false,
-              "load" : true,
-              "mq" : false,
-              "cssclasses" : true
-          },
+        // Based on default settings on http://modernizr.com/download/
+        'extra' : {
+          'shiv' : true,
+          'printshiv' : false,
+          'load' : true,
+          'mq' : false,
+          'cssclasses' : true
+        },
 
-          // Based on default settings on http://modernizr.com/download/
-          "extensibility" : {
-              "addtest" : false,
-              "prefixed" : false,
-              "teststyles" : false,
-              "testprops" : false,
-              "testallprops" : false,
-              "hasevents" : false,
-              "prefixes" : false,
-              "domprefixes" : false,
-              "cssclassprefix": ""
-          },
+        // Based on default settings on http://modernizr.com/download/
+        'extensibility' : {
+          'addtest' : false,
+          'prefixed' : false,
+          'teststyles' : false,
+          'testprops' : false,
+          'testallprops' : false,
+          'hasevents' : false,
+          'prefixes' : false,
+          'domprefixes' : false,
+          'cssclassprefix': ''
+        },
 
-          // By default, source is uglified before saving
-          "uglify" : true,
+        // By default, source is uglified before saving
+        'uglify' : true,
 
-          // Define any tests you want to implicitly include.
-          "tests" : [],
+        // Define any tests you want to implicitly include.
+        'tests' : [],
 
-          // By default, this task will crawl your project for references to Modernizr tests.
-          // Set to false to disable.
-          "parseFiles" : true,
+        // By default, this task will crawl your project for references to Modernizr tests.
+        // Set to false to disable.
+        'parseFiles' : true,
 
-          // When parseFiles = true, this task will crawl all *.js, *.css, *.scss and *.sass files,
-          // except files that are in node_modules/.
-          // You can override this by defining a "files" array below.
-          // "files" : {
-              // "src": []
-          // },
+        // When parseFiles = true, this task will crawl all *.js, *.css, *.scss and *.sass files,
+        // except files that are in node_modules/.
+        // You can override this by defining a 'files' array below.
+        // 'files' : {
+        // 'src': []
+        // },
 
-          // This handler will be passed an array of all the test names passed to the Modernizr API, and will run after the API call has returned
-          // "handler": function (tests) {},
+        // This handler will be passed an array of all the test names passed to the Modernizr API, and will run after the API call has returned
+        // 'handler': function (tests) {},
 
-          // When parseFiles = true, matchCommunityTests = true will attempt to
-          // match user-contributed tests.
-          "matchCommunityTests" : false,
+        // When parseFiles = true, matchCommunityTests = true will attempt to
+        // match user-contributed tests.
+        'matchCommunityTests' : false,
 
-          // Have custom Modernizr tests? Add paths to their location here.
-          "customTests" : []
+        // Have custom Modernizr tests? Add paths to their location here.
+        'customTests' : []
       }
-
-  }
+    }
   });
 
   grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-flats');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-webpack');
-  grunt.loadNpmTasks('grunt-template-html');
+  grunt.loadNpmTasks('grunt-nunjucks-2-html');
+  grunt.loadNpmTasks('grunt-prettify');
 
   grunt.registerTask('default', ['build:test']);
 
-  grunt.registerTask('build:test', ['nunjucks:test','sass:test']);
-  grunt.registerTask('build:dist', ['flats:dist','htmlmin:dist','sass:dist']);
+  grunt.registerTask('build:test', ['nunjucks','sass:test']);
+  grunt.registerTask('build:dist', ['nunjucks','htmlmin:dist','sass:dist']);
 
 };
