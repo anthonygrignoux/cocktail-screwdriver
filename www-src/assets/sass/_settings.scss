@@ -1,0 +1,13 @@
+// Settings contain the configuration of the project, including variables dealing with breakpoints, colors, or font
+// It should not directly compile any css
+// Variables' names follow this simple guideline:
+// - $q- as a prefix for media queries
+// - $c- for colors
+// - $f- for font stacks
+
+$q-mobile: 500px;
+$q-tablet: 768px;
+$q-tablet_landscape: 979px;
+$q-desktop: 980px;
+
+$c-links: #0000FF;

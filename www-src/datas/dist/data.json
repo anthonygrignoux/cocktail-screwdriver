@@ -1,0 +1,19 @@
+{
+	"footer": {
+		"title": "footer"
+	},
+	"header": {
+		"title": "The Foo",
+		"name": "A wonderful component"
+	},
+	"content": {
+		"title": "The Foo",
+		"name": "A wonderful component"
+	},
+	"metadata": {
+		"charset": "UTF-8",
+		"description": "This is a description, hellow world!",
+		"keywords": "test, sample, etc",
+		"author": "Name Lastname"
+	}
+}

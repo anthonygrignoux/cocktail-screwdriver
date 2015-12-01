@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-backstop": "^0.1.5",
     "grunt-contrib-htmlmin": "^0.4.0",
+    "grunt-extend": "^0.4.2",
+    "grunt-merge-json": "^0.9.5",
     "grunt-modernizr": "^0.6.0",
     "grunt-nunjucks-2-html": "^1.0.0",
     "grunt-prettify": "^0.4.0",
-    "grunt-sass": "^1.0.0",
+    "grunt-sass": "^1.1.0",
+    "grunt-sass-globbing": "^1.4.0",
     "grunt-webpack": "^1.0.11",
     "time-grunt": "^1.2.1",
     "webpack": "^1.12.0",
     "webpack-dev-server": "^1.10.1"
-  }
+  },
+  "dependencies": {}
 }

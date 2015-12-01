@@ -9,20 +9,34 @@ module.exports = function(grunt) {
     sass: {
       test: {
         options: {
-            sourceMap: true,
-            outputStyle: 'expanded'
+          sourceMap: true,
+          outputStyle: 'expanded'
         },
         files: {
-            'www-test/assets/css/main.css': 'www-src/assets/sass/main.scss'
+          'www-test/assets/css/main.css': 'www-src/assets/sass/main.scss',
+          'www-test/assets/css/oldie.css': 'www-src/assets/sass/oldie.scss'
         }
       },
       dist: {
         options: {
-            sourceMap: false,
-            outputStyle: 'compressed'
+          sourceMap: false,
+          outputStyle: 'compressed'
         },
         files: {
-            'www-dist/assets/css/main.css': 'www-src/assets/sass/main.scss'
+          'www-dist/assets/css/main.css': 'www-src/assets/sass/main.scss',
+          'www-dist/assets/css/oldie.css': 'www-src/assets/sass/oldie.scss'
+        }
+      }
+    },
+    // -------------------------------------------------------
+    // grunt-sass-globbing
+    sass_globbing: {
+      all: {
+        options: {
+          signature: '// Modules'
+        },
+        files: {
+          'www-src/assets/sass/_imported-modules.scss': 'www-src/modules/**/*.scss'
         }
       }
     },
@@ -53,22 +67,8 @@ module.exports = function(grunt) {
         dest: 'www-test/pages/'
       }
     },
-    nunjucks: {
-      options: {
-         data: grunt.file.readJSON('data.json'),
-      },
-      render: {
-        files: [
-           {
-              expand: true,
-              cwd: "www-src/pages/",
-              src: "*.html",
-              dest: "www-test/pages/",
-              ext: ".html"
-           }
-        ]
-      }
-    },
+    // -------------------------------------------------------
+    // grunt-prettify
     prettify: {
       options: {},
       test: {
@@ -80,20 +80,64 @@ module.exports = function(grunt) {
       }
     },
     // -------------------------------------------------------
+    // grunt-merge-json
+    'merge-json': {
+      all: {
+        files: [
+          {
+            src: ['www-src/modules/**/data.json','www-src/datas/src/**/*.json','www-src/pages/**/*.json'],
+            dest: 'www-src/datas/dist/data.json'
+          },
+        ],
+      }
+    },
+    // -------------------------------------------------------
+    // grunt-nunjucks-2-html
+    nunjucks: {
+      test: {
+        options: {
+          data: grunt.file.readJSON('www-src/datas/dist/data.json'),
+        },
+        files: [
+          {
+            expand: true,
+            cwd: "www-src/pages/",
+            src: "*.html",
+            dest: "www-test/pages/",
+            ext: ".html"
+          }
+        ]
+      },
+      dist: {
+        options: {
+          data: grunt.file.readJSON('www-src/datas/dist/data.json'),
+        },
+        files: [
+          {
+            expand: true,
+            cwd: "www-src/pages/",
+            src: "*.html",
+            dest: "www-dist/pages/",
+            ext: ".html"
+          }
+        ]
+      }
+    },
+    // -------------------------------------------------------
     // grunt-webpack
     webpack: {
       test: {
         // webpack options
         entry: './www-src/assets/scripts/main.js',
         output: {
-            path: 'www-test/assets/scripts',
-            filename: 'bundle.js',
+          path: 'www-test/assets/scripts',
+          filename: 'bundle.js',
         },
         stats: {
-            // Configure the console output
-            colors: false,
-            modules: true,
-            reasons: true
+          // Configure the console output
+          colors: false,
+          modules: true,
+          reasons: true
         },
       }
     },
@@ -160,15 +204,19 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-sass-globbing');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-nunjucks-2-html');
   grunt.loadNpmTasks('grunt-prettify');
+  grunt.loadNpmTasks('grunt-merge-json');
+
+  grunt.registerTask('sass-test', ['sass_globbing','sass:test']);
+  grunt.registerTask('sass-dist', ['sass_globbing','sass:dist']);
+  grunt.registerTask('build:test', ['nunjucks:test','sass-test']);
+  grunt.registerTask('build:dist', ['nunjucks:dist','htmlmin:dist','sass-dist']);
 
   grunt.registerTask('default', ['build:test']);
-
-  grunt.registerTask('build:test', ['nunjucks','sass:test']);
-  grunt.registerTask('build:dist', ['nunjucks','htmlmin:dist','sass:dist']);
 
 };

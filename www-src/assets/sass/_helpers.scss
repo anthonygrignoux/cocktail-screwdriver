@@ -1,0 +1,52 @@
+// Useful classes used often in the html to solve recurring problems
+// It uses sass placeholder in certain cases:
+// - when the repetition of a rule for a given style is bigger than the repetition of the selector
+// - when no presentation class (oocss) exist or will be used to prevent html clutter
+// /!\ use placeholders wisely, i.e. not too many times or your css, instead of your html, could become cluttered
+
+// Contain floats: nicolasgallagher.com/micro-clearfix-hack/
+%clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  @if $oldie {
+    .ie7 & {
+      zoom: 1;
+    }
+  }
+}
+.clearfix {
+  @extend %clearfix;
+}
+
+// "..." on text-overflow
+%ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Clears floating elements
+.clear {
+  clear: both;
+}
+
+// inline lists
+%inline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none outside;
+  li {
+    display: inline-block;
+    @if $oldie {
+      .ie7 & {
+        display: inline;
+      }
+    }
+  }
+}

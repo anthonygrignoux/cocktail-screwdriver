@@ -1,0 +1,103 @@
+// Mixins and other functionnal tools
+// It should not directly compile any css
+
+@mixin breakpoint($min-width, $max-width: false, $touch: false, $nested: false) {
+// Pour les navigateurs modernes (ie9+) :
+    @if $media-queries {
+        @media screen and (min-width: $min-width) {
+        // s'il y a un max-width on l'ajoute à la media query avant d'afficher le contenu
+            @if $max-width {
+                @media (max-width: $max-width) {
+                    @content;
+                }
+            } @else {
+                @content;
+            }
+        }
+        @if $touch and $nested {
+            .touch & {
+                @content;
+            }
+        } @else if $touch and not $nested {
+            .touch {
+                @content;
+            }
+        }
+    } // Pour les navigateurs pourris :
+    // si le min-width et max-width ne sont pas plus grands que $desktop
+    @else if $min-width <= $desktop and (not $max-width or $max-width and $max-width >= $desktop) {
+        @content;
+    }
+}
+
+// ------------------------------------------- //
+// FUNCTION: rem();
+// DESCRIPTION: font size in REM
+// ------------------------------------------- //
+
+@function rem($target, $context: 10) {
+    @return ($target/$context) * 1rem;
+}
+
+// ------------------------------------------------------------------------------- //
+// MIXIN: rem-size();
+//
+// VERSION: 1.2.0
+// DESCRIPTION: add "font-size" in REM for all recent browsers and in PX for IE7/8
+// ------------------------------------------------------------------------------- //
+
+@mixin rem-size($size) {
+    @if $oldie == false {
+        font-size: rem($size);
+    } @else {
+        font-size: $size * 1px;
+    }
+}
+
+// ============================================================================================= //
+// Mixin: gradient
+//
+// Version: 1.6.0
+// Description: create simple linear gradient
+//
+// PARAMETERS:
+//
+//      $angle: gradient orientation, "vertical" or "horizontal"
+//      $startColor: starting color in HEX or RGBa
+//      $endColor: ending color in HEX or RGBa
+//      $startLocation: starting percentage (0% by default)
+//      $endLocation: ending percentage (100% by default)
+//      $prefix: boolean (false by default)
+//      $ieFilter: boolean (false by default), using for IE7+. Important for IE9!
+//
+// ============================================================================================= //
+
+@mixin gradient($angle, $startColor, $endColor, $startLocation: 0%, $endLocation: 100%, $prefix: false, $ieFilter: false) {
+    $gradient: linear;
+    $angleOld: null;
+    $angleNorm: null;
+    $ieType: null;
+
+    @if $angle == "vertical"{
+        $angleOld: top;
+        $angleNorm: to bottom;
+        $ieType: 0;
+    } @else if $angle == "horizontal"{
+        $angleOld: left;
+        $angleNorm: to right;
+        $ieType: 1;
+    }
+
+    @if $oldie == false {
+        background: #{$gradient}-gradient($angleNorm, $startColor $startLocation, $endColor $endLocation);
+        @if $prefix {
+            @each $prefix in -moz-, -webkit-, -o- {
+                background: #{$prefix}#{$gradient}-gradient($angleOld, $startColor $startLocation, $endColor $endLocation);
+            }
+        }
+    }
+
+    @if $ieFilter {
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$startColor}', endColorstr='#{$endColor}', GradientType=#{$ieType});
+    }
+}

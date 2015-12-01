@@ -1,13 +1,16 @@
-* {
-	background: red;
-}
-div {
-	display: block;
-	float: left;
-}
+@charset "UTF-8";
 
-@import "test-external";
+$oldie: false !default;
+$media-queries: true !default;
 
-.stuff {
-	background: red;
-}
+// no css should be written by the following files
+@import "toolbox";
+@import "settings";
+
+// css will be written by the following files
+@import "normalize";
+@import "layout";
+@import "base";
+@import "helpers";
+@import "modules";
+@import "theme";

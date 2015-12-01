@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
   <head>
-    <meta charset="utf-8">
+    <meta charset="{{metadata.charset}}">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title></title>
     <meta name="description" content="" />
@@ -16,9 +16,11 @@
     {% block zone_head %}
       {% include "../modules/header/header.html" %}
     {% endblock %}
+
     {% block zone_main %}
-      <p>Nothing should be here</p>
+      <p>This will be replaced by the layout content</p>
     {% endblock %}
+
     {% block zone_footer %}
       {% include "../modules/footer/footer.html" %}
     {% endblock %}
