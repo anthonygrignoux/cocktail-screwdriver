@@ -41,6 +41,31 @@ module.exports = function(grunt) {
       }
     },
     // -------------------------------------------------------
+    // postcss (mainly for autoprefixer)
+    postcss: {
+      dist: {
+        src: 'www-dist/**/*.css',
+        options: {
+          map: false,
+          processors: [
+            require('autoprefixer')({
+              browsers: ['ie 8', '> 10%']
+            })
+          ]
+        },
+      },
+      test: {
+        src: 'www-test/**/*.css',      options: {
+          map: true,
+          processors: [
+            require('autoprefixer')({
+              browsers: ['ie 8', '> 10%']
+            })
+          ]
+        },
+      }
+    },
+    // -------------------------------------------------------
     // html-min
     htmlmin: {
       dist: {
@@ -211,6 +236,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nunjucks-2-html');
   grunt.loadNpmTasks('grunt-prettify');
   grunt.loadNpmTasks('grunt-merge-json');
+  grunt.loadNpmTasks('grunt-postcss');
 
   grunt.registerTask('sass-test', ['sass_globbing','sass:test']);
   grunt.registerTask('sass-dist', ['sass_globbing','sass:dist']);
