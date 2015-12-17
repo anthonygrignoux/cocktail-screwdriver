@@ -172,10 +172,10 @@ module.exports = function(grunt) {
 
       dist: {
         // [REQUIRED] Path to the build you're using for development.
-        'devFile' : 'lib/modernizr-dev.js',
+        'devFile' : 'www-src/assets/scripts/modernizr-dev.js',
 
         // Path to save out the built file.
-        'outputFile' : 'build/modernizr-custom.js',
+        'outputFile' : 'www-src/assets/scripts/modernizr-dist.js',
 
         // Based on default settings on http://modernizr.com/download/
         'extra' : {
@@ -237,7 +237,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-prettify');
   grunt.loadNpmTasks('grunt-merge-json');
   grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks("grunt-modernizr");
 
+  grunt.registerTask('generate-content', ['merge-json']);
   grunt.registerTask('sass-test', ['sass_globbing','sass:test']);
   grunt.registerTask('sass-dist', ['sass_globbing','sass:dist']);
   grunt.registerTask('build:test', ['nunjucks:test','sass-test']);

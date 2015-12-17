@@ -1,0 +1,13 @@
+{% macro lipsum_string(text="",start=0,length=150,randStart=0,randLength=0) %}
+{{ text[(start+length+(range(0,randLength)|random()|int(0)))]|upper }}{% for j in range( (start+(range(0,randStart)|random())|int(0)), (start+length+(range(0,randLength)|random()|int(0))) ) %}{{ text[j] }}{% endfor %}
+{% endmacro %}
+
+{% macro lipsum_text(text="",number=1,start=0,length=150,randStart=0,randLength=0,class='') %}
+  {% for i in range(0, number) %}<p{{ (' class="' ~ class ~ '"')|safe if (class != '') else '' }}>{{ text[(start+length+(range(0,randLength)|random()|int(0)))]|upper }}{% for j in range( (start+(range(0,randStart)|random())|int(0)), (start+length+(range(0,randLength)|random()|int(0))) ) %}{{ text[j] }}{% endfor %}.</p>
+  {% endfor %}
+{% endmacro %}
+
+{% macro lipsum_list(text="",number=1,start=0,length=150,randStart=0,randLength=0,class='') %}
+  {% for i in range(0, number) %}<li{{ (' class="' ~ class ~ '"')|safe if (class != '') else '' }}>{{ text[(start+length+(range(0,randLength)|random()|int(0)))]|upper }}{% for j in range( (start+(range(0,randStart)|random())|int(0)), (start+length+(range(0,randLength)|random()|int(0))) ) %}{{ text[j] }}{% endfor %}</li>
+  {% endfor %}
+{% endmacro %}

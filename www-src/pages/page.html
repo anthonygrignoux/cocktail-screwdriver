@@ -1,7 +1,8 @@
 {% extends "../layout/layout-2col.html" %}
+{% import "../nunjucks/macros.html" as macros %}
 
 {% block zone_col1 %}
-xxx
+{{ macros.lipsum_text(text=lorem.ipsum,number=5,randLength=900,randStart=10,class="truc") }}
 {% endblock %}
 
 {% block zone_col2 %}

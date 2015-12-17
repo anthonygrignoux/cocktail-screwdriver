@@ -8,7 +8,7 @@
     "grunt-contrib-htmlmin": "^0.4.0",
     "grunt-extend": "^0.4.2",
     "grunt-merge-json": "^0.9.5",
-    "grunt-modernizr": "^0.6.0",
+    "grunt-modernizr": "^0.6.1",
     "grunt-nunjucks-2-html": "^1.0.0",
     "grunt-postcss": "^0.7.1",
     "grunt-prettify": "^0.4.0",
