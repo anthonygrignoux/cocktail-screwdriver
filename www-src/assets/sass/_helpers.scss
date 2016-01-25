@@ -32,8 +32,11 @@
 }
 
 // Clears floating elements
-.clear {
+%clear {
   clear: both;
+}
+.clear {
+  @extend %clear;
 }
 
 // inline lists

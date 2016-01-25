@@ -95,7 +95,9 @@ module.exports = function(grunt) {
     // -------------------------------------------------------
     // grunt-prettify
     prettify: {
-      options: {},
+      options: {
+        preserve_newlines: true
+      },
       test: {
         expand: true,
         cwd: 'www-test/pages',

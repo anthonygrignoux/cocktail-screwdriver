@@ -1,6 +1,8 @@
 // Mixins and other functionnal tools
 // It should not directly compile any css
 
+// Originally from https://github.com/skymaiden/skymaiden-sass
+// http://skymaiden.mit-license.org/
 @mixin breakpoint($min-width, $max-width: false, $touch: false, $nested: false) {
 // Pour les navigateurs modernes (ie9+) :
     @if $media-queries {
