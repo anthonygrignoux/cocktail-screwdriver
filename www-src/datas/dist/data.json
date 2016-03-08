@@ -1,10 +1,9 @@
 {
-	"footer": {
-		"title": "footer"
-	},
+	"footer": {},
 	"header": {
-		"title": "The Foo",
-		"name": "A wonderful component"
+		"topnav": [
+			{}
+		]
 	},
 	"content": {
 		"title": "The Foo",

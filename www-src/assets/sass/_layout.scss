@@ -1,3 +1,11 @@
 // LAYOUT
 // The general visual structure of the site
 // the prefix .l- is used for that
+
+// susy grid
+// definitions
+$susy: (
+  global-box-sizing: border-box,
+  gutter-position: before,
+  gutters: 1/3
+);

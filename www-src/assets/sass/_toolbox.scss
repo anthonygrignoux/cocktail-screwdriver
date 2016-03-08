@@ -1,35 +1,37 @@
 // Mixins and other functionnal tools
-// It should not directly compile any css
+// It should not directly compile any css unless called
+// It should not be specific to the project
 
 // Originally from https://github.com/skymaiden/skymaiden-sass
 // http://skymaiden.mit-license.org/
+
 @mixin breakpoint($min-width, $max-width: false, $touch: false, $nested: false) {
-// Pour les navigateurs modernes (ie9+) :
-    @if $media-queries {
-        @media screen and (min-width: $min-width) {
-        // s'il y a un max-width on l'ajoute à la media query avant d'afficher le contenu
-            @if $max-width {
-                @media (max-width: $max-width) {
-                    @content;
-                }
-            } @else {
-                @content;
-            }
+  // Pour les navigateurs modernes (ie9+) :
+  @if $media-queries {
+    @media screen and (min-width: $min-width) {
+      // s'il y a un max-width on l'ajoute à la media query avant d'afficher le contenu
+      @if $max-width {
+        @media (max-width: $max-width) {
+          @content;
         }
-        @if $touch and $nested {
-            .touch & {
-                @content;
-            }
-        } @else if $touch and not $nested {
-            .touch {
-                @content;
-            }
-        }
-    } // Pour les navigateurs pourris :
-    // si le min-width et max-width ne sont pas plus grands que $desktop
-    @else if $min-width <= $desktop and (not $max-width or $max-width and $max-width >= $desktop) {
+      } @else {
         @content;
+      }
     }
+    @if $touch and $nested {
+      .touch & {
+        @content;
+      }
+    } @else if $touch and not $nested {
+      .touch {
+        @content;
+      }
+    }
+  } // Pour les navigateurs pourris :
+  // si le min-width et max-width ne sont pas plus grands que $desktop
+  @else if $min-width <= $desktop and (not $max-width or $max-width and $max-width >= $desktop) {
+    @content;
+  }
 }
 
 // ------------------------------------------- //
@@ -37,8 +39,8 @@
 // DESCRIPTION: font size in REM
 // ------------------------------------------- //
 
-@function rem($target, $context: 10) {
-    @return ($target/$context) * 1rem;
+@function rem($target, $context: 16) {
+  @return ($target/$context) * 1rem;
 }
 
 // ------------------------------------------------------------------------------- //
@@ -48,58 +50,71 @@
 // DESCRIPTION: add "font-size" in REM for all recent browsers and in PX for IE7/8
 // ------------------------------------------------------------------------------- //
 
-@mixin rem-size($size) {
-    @if $oldie == false {
-        font-size: rem($size);
-    } @else {
-        font-size: $size * 1px;
-    }
+@mixin rem-size($target, $context: 16) {
+  @if $oldie == false {
+    font-size: rem($target, $context);
+  } @else {
+    font-size: $target * 1px;
+  }
 }
 
-// ============================================================================================= //
-// Mixin: gradient
-//
-// Version: 1.6.0
-// Description: create simple linear gradient
-//
-// PARAMETERS:
-//
-//      $angle: gradient orientation, "vertical" or "horizontal"
-//      $startColor: starting color in HEX or RGBa
-//      $endColor: ending color in HEX or RGBa
-//      $startLocation: starting percentage (0% by default)
-//      $endLocation: ending percentage (100% by default)
-//      $prefix: boolean (false by default)
-//      $ieFilter: boolean (false by default), using for IE7+. Important for IE9!
-//
-// ============================================================================================= //
+// Originally from https://github.com/skymaiden/skymaiden-sass
+// http://skymaiden.mit-license.org/
 
-@mixin gradient($angle, $startColor, $endColor, $startLocation: 0%, $endLocation: 100%, $prefix: false, $ieFilter: false) {
-    $gradient: linear;
-    $angleOld: null;
-    $angleNorm: null;
-    $ieType: null;
+// Calculate font size in ems
+@function sky-em($target, $context: 16) {
+    @return ($target / $context) * 1em;
+}
 
-    @if $angle == "vertical"{
-        $angleOld: top;
-        $angleNorm: to bottom;
-        $ieType: 0;
-    } @else if $angle == "horizontal"{
-        $angleOld: left;
-        $angleNorm: to right;
-        $ieType: 1;
+// ------------------------------------------------------------------------------- //
+// COMMON AND RECURRING STYLES
+// ------------------------------------------------------------------------------- //
+
+// "..." on text-overflow
+@mixin ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Contain floats: nicolasgallagher.com/micro-clearfix-hack/
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  @if $oldie {
+    .ie7 & {
+      zoom: 1;
     }
+  }
+}
 
-    @if $oldie == false {
-        background: #{$gradient}-gradient($angleNorm, $startColor $startLocation, $endColor $endLocation);
-        @if $prefix {
-            @each $prefix in -moz-, -webkit-, -o- {
-                background: #{$prefix}#{$gradient}-gradient($angleOld, $startColor $startLocation, $endColor $endLocation);
-            }
-        }
-    }
+// No bullet, no style lists
+@mixin list-unstyled() {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-    @if $ieFilter {
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$startColor}', endColorstr='#{$endColor}', GradientType=#{$ieType});
-    }
+// css triangles
+// https://gist.github.com/dustinhorton/82a89fcff9dea1251333#file-sass-triangle-mixin-1-sass
+@mixin triangle($dir, $size, $color) {
+  border: $size transparent solid;
+  @if ($dir == "top" or $dir == "up") {
+    border-bottom-color: $color;
+  }
+  @else if ($dir == "right" or $dir == "after") {
+    border-left-color: $color;
+  }
+  @else if ($dir == "bottom" or $dir == "down") {
+    border-top-color: $color;
+  }
+  @else if ($dir == "left" or $dir == "before") {
+    border-right-color: $color;
+  }
 }

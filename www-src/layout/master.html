@@ -1,29 +1,37 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="modernizr-no-js" lang="fr">
   <head>
-    <meta charset="{{metadata.charset}}">
+    <meta charset="{{ metadata.charset }}">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title></title>
+    <title>{{ pagetitle }} - Sample website</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
     <!-- Place favicon.ico in the root directory -->
+    <!-- -->
     <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/javascript" src="../assets/scripts/modernizr.js"></script>
   </head>
   <body>
+    <div class="hidden" aria-hidden="true">
+      <!-- le sprite svg chargé avant le reste de la page -->
+      {% include "../assets/icons/sprite/sprite.svg" %}
+    </diV>
 
-{% block zone_head %}
-  {% include "../modules/header/header.html" %}
-{% endblock %}
+    {% block zone_head %}
+    {% include "../modules/header/header.html" %}
+    {% endblock %}
 
-{% block zone_main %}
-  <p>This will be replaced by the layout content</p>
-{% endblock %}
+    <div class="wrapper wrapper-main">
+      {% block zone_main %}
+      <p>This will be replaced by the layout content</p>
+      {% endblock %}
+    </div>
 
-{% block zone_footer %}
-  {% include "../modules/footer/footer.html" %}
-{% endblock %}
+    {% block zone_footer %}
+    {% include "../modules/footer/footer.html" %}
+    {% endblock %}
 
     <script type="text/javascript" src="../assets/scripts/bundle.js"></script>
   </body>

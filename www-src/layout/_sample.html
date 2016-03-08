@@ -1,0 +1,62 @@
+{% extends "../layout/master.html" %}
+{% set layout = 'hp' %}
+
+{% block zone_main %}
+
+  <section class="l-zone">
+    <div class="l-grid l-flex-row">
+      <div class="l-col-8-12 l-flex-col">
+        {% block zone_widgets_1 %}
+        {% endblock %}
+      </div>
+      <div class="l-col-4-12 l-flex-col">
+        {% block zone_widgets_2 %}
+        {% endblock %}
+      </div>
+    </div>
+    <div class="l-grid">
+      <div class="l-col-12-12">
+        {% block zone_widgets_3 %}
+        {% endblock %}
+      </div>
+    </div>
+  </section>
+
+  {# next section is "animated" by scrollme thanks to the scrollme and animateme classes #}
+  <section class="l-zone-hp l-zone-blue l-zone-rooster scrollme">
+    <div class="l-grid">
+      <div class="l-col-12-12">
+        {#  #}
+        {% block zone_widgets_4 %}
+        {% endblock %}
+      </div>
+    </div>
+    <div class="icon-rooster zone-deco animateme" aria-hidden="true"
+      data-when="exit"
+      data-from="1"
+      data-to="-0"
+      data-opacity="1"
+      data-translatey="500">
+      <svg><use xlink:href="#icon-rooster" /></svg>
+    </div>
+  </section>
+
+  <section class="l-zone-hp l-zone-tricolor l-grid l-flex-zone l-flex-row">
+    <div class="l-col-4-12 l-flex-col">
+      {#  #}
+      {% block zone_widgets_5 %}
+      {% endblock %}
+    </div>
+    <div class="l-col-4-12 l-flex-col">
+      {#  #}
+      {% block zone_widgets_6 %}
+      {% endblock %}
+    </div>
+    <div class="l-col-4-12 l-flex-col">
+      {#  #}
+      {% block zone_widgets_7 %}
+      {% endblock %}
+    </div>
+  </section>
+
+{% endblock %}
