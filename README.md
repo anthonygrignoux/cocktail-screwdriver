@@ -1,4 +1,4 @@
-CDOS Static boilerplate
+Static html/css/js boilerplate
 ==============
 
 This project static integration works with Grunt and Bower to automatically generate files.
