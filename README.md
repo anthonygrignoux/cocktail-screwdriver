@@ -6,6 +6,11 @@ It is still a temporary work in progress and cannot be ported to another project
 
 ## Initialize the project
 
+First of all, edit the package.json so that these informations are present and correct:
+ - name
+ - version
+ - appDir: where your distribution files will be copied if you don't use the distribution files as is (default is www-app)
+
 Use the following commands to install or update the boilerplate's components :
 
     npm install
