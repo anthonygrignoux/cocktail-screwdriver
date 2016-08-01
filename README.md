@@ -4,6 +4,13 @@ Static html/css/js boilerplate
 This project static integration works with Grunt and Bower to automatically generate files.
 It is still a temporary work in progress and cannot be ported to another project without modification
 
+
+## Requirements
+
+This boilerplate requires 2 dependencies installed globally:
+  - nodejs 4.x or higher: download the package on https://nodejs.org
+  - grunt-cli: npm install -g grunt-cli
+
 ## Initialize the project
 
 First of all, edit the package.json so that these informations are present and correct:
