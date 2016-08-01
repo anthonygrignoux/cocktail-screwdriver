@@ -1,6 +1,11 @@
 {
   "name": "name-of-the-project",
   "version": "0.0.1",
+  "license" : "MIT",
+  "repository" :  {
+    "type" : "git",
+    "url" : "https://github.com/anthonygrignoux/cocktail-screwdriver"
+  },
   "appDir": "www-app/",
   "devDependencies": {
     "autoprefixer": "^6.1.2",
