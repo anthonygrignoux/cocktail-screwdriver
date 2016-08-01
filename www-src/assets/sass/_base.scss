@@ -8,7 +8,9 @@
 // https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
 html {
   box-sizing: border-box;
+  overflow: hidden;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -24,11 +26,20 @@ body {
 a {
   color: inherit;
 }
+a[class] {
+  color: inherit;
+}
 
 // responsive images basics
 img {
   max-width: 100%;
   height: auto;
+}
+svg {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  fill: inherit;
 }
 
 // --- THIS PROJECT'S BASE

@@ -1,6 +1,14 @@
+# building dependencies
 node_modules/
-www-dist/
-www-test/
-www-app/
 bower_components/
-/.project
+
+# Static templates
+www-test/
+www-dist/
+www-app/
+
+# Other
+.DS_Store
+.project
+www-src/assets/scripts/dist/
+www-src/assets/icons/sprite/sprite-demo.html

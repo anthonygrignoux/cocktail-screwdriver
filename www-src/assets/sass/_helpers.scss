@@ -9,9 +9,7 @@
 %clearfix {
   @include clearfix();
 }
-.clearfix,
-.cf,
-.grid {
+.clearfix {
   @extend %clearfix;
 }
 

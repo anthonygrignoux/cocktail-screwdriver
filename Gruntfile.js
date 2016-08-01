@@ -19,7 +19,8 @@ module.exports = function(grunt) {
         },
         files: {
           'www-test/assets/css/main.css': 'www-src/assets/sass/main.scss',
-          //'www-test/assets/css/oldie.css': 'www-src/assets/sass/oldie.scss'
+          'www-test/assets/css/facet-front.css': 'www-src/assets/sass/facet-front.scss',
+          'www-test/assets/css/editor.css': 'www-src/assets/sass/editor.scss'
         }
       },
       dist: {
@@ -29,7 +30,8 @@ module.exports = function(grunt) {
         },
         files: {
           'www-dist/assets/css/main.css': 'www-src/assets/sass/main.scss',
-          //'www-dist/assets/css/oldie.css': 'www-src/assets/sass/oldie.scss'
+          'www-dist/assets/css/facet-front.css': 'www-src/assets/sass/facet-front.scss'
+          // 'www-dist/assets/css/editor.css': 'www-src/assets/sass/editor.scss'
         }
       }
     },
@@ -135,7 +137,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: "www-src/pages/",
             src: "*.html",
-            dest: "www-test/pages/",
+            dest: "www-test/",
             ext: ".html"
           }
         ]
@@ -149,7 +151,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: "www-src/pages/",
             src: "*.html",
-            dest: "www-dist/pages/",
+            dest: "www-dist/",
             ext: ".html"
           }
         ]
@@ -160,7 +162,7 @@ module.exports = function(grunt) {
     svgstore: {
       options: {
         prefix : 'icon-',
-        cleanup: true,
+        cleanup: false,
         svg: {
           xmlns: 'http://www.w3.org/2000/svg'
         }
@@ -197,12 +199,15 @@ module.exports = function(grunt) {
     // -------------------------------------------------------
     // grunt-contrib-watch
     watch: {
+      options: {
+         spawn: false
+      },
       html: {
         files: ['www-src/**/*.html'],
         tasks: ['nunjucks:test'],
       },
       css: {
-        files: ['www-src/assets/sass/**/*.scss'],
+        files: ['www-src/assets/sass/**/*.scss','www-src/assets/sass/**/**/*.scss'],
         tasks: ['css-test'],
       },
       js: {
@@ -214,7 +219,7 @@ module.exports = function(grunt) {
         tasks: ['generate-content-test'],
       },
       svg: {
-        files: ['www-src/assets/icons/src/*.svg'],
+        files: ['www-src/assets/icons/src/**/*.svg'],
         tasks: ['svgstore:sprite','nunjucks:test'],
       },
       img: {
@@ -233,9 +238,11 @@ module.exports = function(grunt) {
     browserSync: {
       test: {
         bsFiles: {
-          src : 'www-test/**/*.*'
+          src : ['www-test/assets/css/**/*.css','www-test/**/*.*']
         },
         options: {
+          injectChanges: true,
+          reloadDelay: 1000,
           server: {
             baseDir: "www-test/",
             directory: true
@@ -248,15 +255,16 @@ module.exports = function(grunt) {
     uglify: {
       test: {
         options: {
-          beautify: true
+          beautify: true,
+          mangle: false
         },
         files: {
-          'www-test/assets/scripts/bundle.js': 'www-test/assets/scripts/bundle.js'
+          'www-test/assets/scripts/bundle.js': 'www-src/assets/scripts/dist/bundle.js'
         }
       },
       dist: {
         files: {
-          'www-dist/assets/scripts/bundle.js': 'www-dist/assets/scripts/bundle.js'
+          'www-dist/assets/scripts/bundle.js': 'www-src/assets/scripts/dist/bundle.js'
         }
       }
     },
@@ -264,10 +272,10 @@ module.exports = function(grunt) {
     // grunt-browserify
     browserify : {
       test: {
-        files : { 'www-test/assets/scripts/bundle.js' : ['www-src/assets/scripts/entry.js'] }
+        files : { 'www-src/assets/scripts/dist/bundle.js' : ['www-src/assets/scripts/entry.js'] }
       },
       dist: {
-        files : { 'www-dist/assets/scripts/bundle.js' : ['www-src/assets/scripts/entry.js'] }
+        files : { 'www-src/assets/scripts/dist/bundle.js' : ['www-src/assets/scripts/entry.js'] }
       }
     },
     // -------------------------------------------------------
@@ -436,7 +444,7 @@ module.exports = function(grunt) {
     grunt.task.run('sync:app');
   });
   // Run browserSync and watch concurrently
-  grunt.registerTask('showme', ['concurrent:showme']);
+  grunt.registerTask('showme', ['build:test','concurrent:showme']);
   // default
   grunt.registerTask('default', ['build:test']);
 

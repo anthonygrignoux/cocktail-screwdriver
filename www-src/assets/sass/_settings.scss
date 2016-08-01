@@ -28,18 +28,3 @@ $c-text_lightgrey: #adadad;
 $c-rss: #ee7727;
 $c-facebook: #4672b3;
 $c-linkedin: #3e8cbf;
-
-// Those Mixins are very specific to the project
-
-// vertical spacing on zones in the hp
-@mixin spacing_sections_vertical ($padding-v: 60px) {
-  padding-top: $padding-v;
-  padding-bottom: $padding-v;
-}
-// links not underlined but when they are hovered
-@mixin links_no_deco () {
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
