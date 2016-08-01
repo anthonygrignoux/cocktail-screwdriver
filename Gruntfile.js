@@ -19,7 +19,6 @@ module.exports = function(grunt) {
         },
         files: {
           'www-test/assets/css/main.css': 'www-src/assets/sass/main.scss',
-          'www-test/assets/css/facet-front.css': 'www-src/assets/sass/facet-front.scss',
           'www-test/assets/css/editor.css': 'www-src/assets/sass/editor.scss'
         }
       },
@@ -30,8 +29,7 @@ module.exports = function(grunt) {
         },
         files: {
           'www-dist/assets/css/main.css': 'www-src/assets/sass/main.scss',
-          'www-dist/assets/css/facet-front.css': 'www-src/assets/sass/facet-front.scss'
-          // 'www-dist/assets/css/editor.css': 'www-src/assets/sass/editor.scss'
+          'www-dist/assets/css/editor.css': 'www-src/assets/sass/editor.scss'
         }
       }
     },
