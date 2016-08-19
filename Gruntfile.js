@@ -117,7 +117,7 @@ module.exports = function(grunt) {
       all: {
         files: [
           {
-            src: ['www-src/modules/**/data.json','www-src/datas/src/**/*.json','www-src/pages/**/*.json'],
+            src: ['www-src/modules/**/mod-*.json','www-src/modules/**/data.json','www-src/datas/src/**/*.json','www-src/pages/**/*.json'],
             dest: 'www-src/datas/dist/data.json'
           },
         ],
@@ -197,32 +197,47 @@ module.exports = function(grunt) {
     // -------------------------------------------------------
     // grunt-contrib-watch
     watch: {
-      options: {
-         spawn: false
-      },
       html: {
         files: ['www-src/**/*.html'],
         tasks: ['nunjucks:test'],
+        options: {
+          spawn: true,
+        },
       },
       css: {
         files: ['www-src/assets/sass/**/*.scss','www-src/assets/sass/**/**/*.scss'],
         tasks: ['css-test'],
+        options: {
+          spawn: false,
+        },
       },
       js: {
         files: ['www-src/assets/scripts/**/*.js'],
         tasks: ['js-test'],
+        options: {
+          spawn: false,
+        },
       },
       datas: {
-        files: ['www-src/modules/**/data.json','www-src/datas/src/**/*.json','www-src/pages/**/*.json'],
+        files: ['www-src/modules/**/mod-*.json','www-src/modules/**/data.json','www-src/datas/src/**/*.json','www-src/pages/**/*.json'],
         tasks: ['generate-content-test'],
+        options: {
+          spawn: true,
+        },
       },
       svg: {
         files: ['www-src/assets/icons/src/**/*.svg'],
         tasks: ['svgstore:sprite','nunjucks:test'],
+        options: {
+          spawn: false,
+        },
       },
       img: {
         files: ['www-src/assets/**/*.{png,jpg,gif}'],
         tasks: ['imagemin-new-test'],
+        options: {
+          spawn: true,
+        },
       },
       configFiles: {
         files: [ 'Gruntfile.js', 'config/*.js' ],
