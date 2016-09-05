@@ -81,9 +81,9 @@ module.exports = function(grunt) {
           minifyCSS: true
         },
         expand: true,
-        cwd: 'www-dist/pages/',
+        cwd: 'www-dist/',
         src: ['**/*.html'],
-        dest: 'www-dist/pages/'
+        dest: 'www-dist/'
       },
       test: {
         options: {
@@ -92,9 +92,9 @@ module.exports = function(grunt) {
           minifyCSS: true
         },
         expand: true,
-        cwd: 'www-test/pages/',
+        cwd: 'www-dist/',
         src: ['**/*.html'],
-        dest: 'www-test/pages/'
+        dest: 'www-dist/'
       }
     },
     // -------------------------------------------------------
@@ -354,6 +354,28 @@ module.exports = function(grunt) {
         }],
         verbose: true,
         updateAndDelete: true
+      },
+      test: {
+        files: [{
+          cwd: 'www-src/assets/',
+          src: [
+            'illus/*.svg', // svg
+            'fonts/**', // fonts
+          ],
+          dest: 'www-test/assets/',
+        }],
+        verbose: true
+      },
+      dist: {
+        files: [{
+          cwd: 'www-src/assets/',
+          src: [
+            'illus/*.svg', // svg
+            'fonts/**', // fonts
+          ],
+          dest: 'www-dist/assets/',
+        }],
+        verbose: true
       }
     },
     // grunt-contrib-clean
@@ -437,6 +459,7 @@ module.exports = function(grunt) {
   // build the website
   grunt.registerTask('build:test', function() {
     grunt.task.run('clean:test');
+    grunt.task.run('sync:test');
     grunt.task.run('generate-content-test');
     grunt.task.run('css-test');
     grunt.task.run('imagemin-new-test');
@@ -445,6 +468,7 @@ module.exports = function(grunt) {
   });
   grunt.registerTask('build:dist', function() {
     grunt.task.run('clean:dist');
+    grunt.task.run('sync:dist');
     grunt.task.run('generate-content-dist');
     grunt.task.run('css-dist');
     grunt.task.run('imagemin-new-dist');
