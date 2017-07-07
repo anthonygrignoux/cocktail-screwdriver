@@ -2,10 +2,6 @@ Tools :
 
 ["global" = doit être installé globalement, "save-dev" sera installé à l'exécution de npm install]
 
-* Bower (global)
-http://bower.io/
-Installation des librairies JS
-
 * Grunt (global + save-dev)
 http://gruntjs.com/
 Lanceur de tâches

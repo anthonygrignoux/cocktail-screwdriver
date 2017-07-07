@@ -53,7 +53,7 @@ module.exports = function(grunt) {
           map: true,
           processors: [
             require('autoprefixer')({
-              browsers: ['ie 8', '> 5%']
+              browsers: ['ie 8', 'last 10 versions']
             })
           ]
         },
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
           map: false,
           processors: [
             require('autoprefixer')({
-              browsers: ['ie 8', '> 5%']
+              browsers: ['ie 8', 'last 10 versions']
             })
           ]
         },
@@ -349,6 +349,7 @@ module.exports = function(grunt) {
             'backgrounds/**', // background images
             'css/**', // css
             'scripts/**', // js
+            'fonts/**', // fonts
           ],
           dest: appDir + 'assets/',
         }],
@@ -363,6 +364,12 @@ module.exports = function(grunt) {
             'fonts/**', // fonts
           ],
           dest: 'www-test/assets/',
+        },{
+          cwd: 'www-src/assets/favicons/',
+          src: [
+            '**'
+          ],
+          dest: 'www-test/',
         }],
         verbose: true
       },
@@ -374,6 +381,12 @@ module.exports = function(grunt) {
             'fonts/**', // fonts
           ],
           dest: 'www-dist/assets/',
+        },{
+          cwd: 'www-src/assets/favicons/',
+          src: [
+            '**'
+          ],
+          dest: 'www-dist/',
         }],
         verbose: true
       }
