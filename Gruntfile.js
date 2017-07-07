@@ -34,22 +34,11 @@ module.exports = function(grunt) {
       }
     },
     // -------------------------------------------------------
-    // grunt-sass-globbing
-    sass_globbing: {
-      all: {
-        options: {
-          signature: '// Modules'
-        },
-        files: {
-          'www-src/assets/sass/_imported-modules.scss': 'www-src/modules/**/*.scss'
-        }
-      }
-    },
-    // -------------------------------------------------------
     // postcss (mainly for autoprefixer)
     postcss: {
       test: {
-        src: 'www-test/**/*.css',      options: {
+        src: 'www-test/**/*.css',
+				 options: {
           map: true,
           processors: [
             require('autoprefixer')({
@@ -134,7 +123,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: "www-src/pages/",
-            src: "*.html",
+            src: "*.njk",
             dest: "www-test/",
             ext: ".html"
           }
@@ -148,7 +137,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: "www-src/pages/",
-            src: "*.html",
+            src: "*.njk",
             dest: "www-dist/",
             ext: ".html"
           }
@@ -409,7 +398,6 @@ module.exports = function(grunt) {
 
   // --- Load plugins
   // styles
-  grunt.loadNpmTasks('grunt-sass-globbing');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-postcss');
   // html
@@ -448,12 +436,10 @@ module.exports = function(grunt) {
   });
   // fetch and glob the sass files and generates css (test and dist)
   grunt.registerTask('css-test', function() {
-    grunt.task.run('sass_globbing');
     grunt.task.run('sass:test');
     grunt.task.run('postcss:test');
   });
   grunt.registerTask('css-dist', function() {
-    grunt.task.run('sass_globbing');
     grunt.task.run('sass:dist');
     grunt.task.run('postcss:dist');
   });

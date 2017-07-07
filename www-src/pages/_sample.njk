@@ -5,9 +5,9 @@
 #}
 
 {% set pagetitle = "Sample page" %}
-{% extends "../layout/_sample.html" %}
-{% import "../nunjucks/macros.html" as macros %}
+{% extends "../layout/_sample.njk" %}
+{% import "../nunjucks/macros.njk" as macros %}
 
 {% block zone_main %}
-  {% include "www-src/modules/common/_sample.html" %}
+  {% include "www-src/modules/common/_sample.njk" %}
 {% endblock %}
