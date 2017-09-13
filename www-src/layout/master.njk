@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="modernizr-no-js" lang="fr">
+<html class="no-js" lang="fr">
   <head>
     <meta charset="{{ metadata.charset }}">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -14,13 +14,13 @@
     <script type="text/javascript" src="../assets/scripts/modernizr.js"></script>
   </head>
   <body>
-    <div class="hidden" aria-hidden="true">
+    <div class="u-hidden" aria-hidden="true">
       <!-- le sprite svg chargé avant le reste de la page -->
       {% include "../assets/icons/sprite/sprite.svg" %}
     </diV>
 
     {% block zone_head %}
-    {% include "../modules/header/header.njk" %}
+    {% include "../modules/c-header/c-header.njk" %}
     {% endblock %}
 
     <div class="wrapper wrapper-main">
@@ -30,9 +30,12 @@
     </div>
 
     {% block zone_footer %}
-    {% include "../modules/footer/footer.njk" %}
+    {% include "../modules/c-footer/c-footer.njk" %}
     {% endblock %}
-
+    <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
     <script type="text/javascript" src="../assets/scripts/bundle.js"></script>
   </body>
 </html>

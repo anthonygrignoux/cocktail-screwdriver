@@ -3,16 +3,22 @@
 $oldie: false !default;
 $media-queries: true !default;
 
-// 3rd-party libraries not writing code
-@import "node_modules/susy/sass/susy";
-
 // no css should be written by the following files
-@import "toolbox";
-@import "settings";
+// - 3rd party
+@import "node_modules/susy/sass/susy";
+// - settings
+@import "settings.global";
+// - tools
+@import "tools.toolbox";
 
 // css will be written by the following files
+// - reset
 @import "node_modules/normalize.css/normalize";
-@import "base";
-@import "helpers";
-@import "templates";
-@import "theme";
+// - base
+@import "generic.base";
+@import "layout";
+// -components - 3rd party
+// -components - custom
+@import "components.templates";
+// - utility classes
+@import "utilities.helpers";

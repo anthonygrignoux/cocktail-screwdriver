@@ -4,12 +4,13 @@
 // - when the repetition of a rule for a given style is bigger than the repetition of the selector
 // - when no presentation class (oocss) exist or will be used to prevent html clutter
 // /!\ use placeholders wisely, i.e. not too many times or your css, instead of your html, could become cluttered
+// prefix with u-
 
 // Contain floats: nicolasgallagher.com/micro-clearfix-hack/
 %clearfix {
   @include clearfix();
 }
-.clearfix {
+.u-clearfix {
   @extend %clearfix;
 }
 
@@ -17,19 +18,18 @@
 %clear {
   clear: both;
 }
-.clear {
+.u-clear {
   @extend %clear;
 }
 
 // Completely hidden
-.hidden {
+.u-hidden {
   display: none;
 }
 
 // Visually hidden yet read by screen readers
 /*https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html*/
-.visually-hidden,
-.screen-reader-text {
+.u-screenreadertxt {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);

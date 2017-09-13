@@ -1,11 +1,11 @@
 module.exports = function(grunt) {
 
-  // time-grunt pour afficher le temps d'exécution des tâches
+  // time-grunt to display tasks' execution time
   require('time-grunt')(grunt);
 
   // fetch package.json values
   var pkgJson = require('./package.json'),
-      appDir = pkgJson.appDir;
+  appDir = pkgJson.appDir;
 
   grunt.initConfig({
     // -------------------------------------------------------
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
     postcss: {
       test: {
         src: 'www-test/**/*.css',
-				 options: {
+        options: {
           map: true,
           processors: [
             require('autoprefixer')({
@@ -104,12 +104,10 @@ module.exports = function(grunt) {
     // grunt-merge-json
     'merge-json': {
       all: {
-        files: [
-          {
-            src: ['www-src/modules/**/mod-*.json','www-src/modules/**/data.json','www-src/datas/src/**/*.json','www-src/pages/**/*.json'],
-            dest: 'www-src/datas/dist/data.json'
-          },
-        ],
+        files: [{
+          src: ['www-src/modules/**/mod-*.json', 'www-src/modules/**/data.json', 'www-src/datas/src/**/*.json', 'www-src/pages/**/*.json'],
+          dest: 'www-src/datas/dist/data.json'
+        }, ],
       }
     },
     // -------------------------------------------------------
@@ -119,36 +117,32 @@ module.exports = function(grunt) {
         options: {
           data: grunt.file.readJSON('www-src/datas/dist/data.json'),
         },
-        files: [
-          {
-            expand: true,
-            cwd: "www-src/pages/",
-            src: "*.njk",
-            dest: "www-test/",
-            ext: ".html"
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: "www-src/pages/",
+          src: "*.njk",
+          dest: "www-test/",
+          ext: ".html"
+        }]
       },
       dist: {
         options: {
           data: grunt.file.readJSON('www-src/datas/dist/data.json'),
         },
-        files: [
-          {
-            expand: true,
-            cwd: "www-src/pages/",
-            src: "*.njk",
-            dest: "www-dist/",
-            ext: ".html"
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: "www-src/pages/",
+          src: "*.njk",
+          dest: "www-dist/",
+          ext: ".html"
+        }]
       }
     },
     // -------------------------------------------------------
     // grunt-svgstore
     svgstore: {
       options: {
-        prefix : 'icon-',
+        prefix: 'icon-',
         cleanup: false,
         svg: {
           xmlns: 'http://www.w3.org/2000/svg'
@@ -187,14 +181,14 @@ module.exports = function(grunt) {
     // grunt-contrib-watch
     watch: {
       html: {
-        files: ['www-src/**/*.html'],
+        files: ['www-src/**/*.html', 'www-src/**/*.njk'],
         tasks: ['nunjucks:test'],
         options: {
           spawn: true,
         },
       },
       css: {
-        files: ['www-src/assets/sass/**/*.scss','www-src/assets/sass/**/**/*.scss'],
+        files: ['www-src/assets/sass/**/*.scss', 'www-src/assets/sass/**/**/*.scss'],
         tasks: ['css-test'],
         options: {
           spawn: false,
@@ -204,11 +198,11 @@ module.exports = function(grunt) {
         files: ['www-src/assets/scripts/**/*.js'],
         tasks: ['js-test'],
         options: {
-          spawn: false,
+          spawn: true,
         },
       },
       datas: {
-        files: ['www-src/modules/**/mod-*.json','www-src/modules/**/data.json','www-src/datas/src/**/*.json','www-src/pages/**/*.json'],
+        files: ['www-src/modules/**/mod-*.json', 'www-src/modules/**/data.json', 'www-src/datas/src/**/*.json', 'www-src/pages/**/*.json'],
         tasks: ['generate-content-test'],
         options: {
           spawn: true,
@@ -216,7 +210,7 @@ module.exports = function(grunt) {
       },
       svg: {
         files: ['www-src/assets/icons/src/**/*.svg'],
-        tasks: ['svgstore:sprite','nunjucks:test'],
+        tasks: ['svgstore:sprite', 'nunjucks:test'],
         options: {
           spawn: false,
         },
@@ -229,7 +223,7 @@ module.exports = function(grunt) {
         },
       },
       configFiles: {
-        files: [ 'Gruntfile.js', 'config/*.js' ],
+        files: ['Gruntfile.js', 'config/*.js'],
         options: {
           reload: true
         }
@@ -240,7 +234,7 @@ module.exports = function(grunt) {
     browserSync: {
       test: {
         bsFiles: {
-          src : ['www-test/assets/css/**/*.css','www-test/**/*.*']
+          src: ['www-test/assets/css/**/*.css', 'www-test/**/*.*']
         },
         options: {
           injectChanges: true,
@@ -261,53 +255,54 @@ module.exports = function(grunt) {
           mangle: false
         },
         files: {
-          'www-test/assets/scripts/bundle.js': 'www-src/assets/scripts/dist/bundle.js'
+          'www-test/assets/scripts/bundle.js': 'www-test/assets/scripts/bundle.js'
         }
       },
       dist: {
         files: {
-          'www-dist/assets/scripts/bundle.js': 'www-src/assets/scripts/dist/bundle.js'
+          'www-dist/assets/scripts/bundle.js': 'www-dist/assets/scripts/bundle.js'
         }
       }
     },
     // -------------------------------------------------------
     // grunt-browserify
-    browserify : {
+    browserify: {
       test: {
-        files : { 'www-src/assets/scripts/dist/bundle.js' : ['www-src/assets/scripts/entry.js'] }
+        files: {
+          'www-test/assets/scripts/bundle.js': ['www-src/assets/scripts/entry__browserify.js']
+        }
       },
       dist: {
-        files : { 'www-src/assets/scripts/dist/bundle.js' : ['www-src/assets/scripts/entry.js'] }
+        files: {
+          'www-dist/assets/scripts/bundle.js': ['www-src/assets/scripts/entry__browserify.js']
+        }
       }
     },
     // -------------------------------------------------------
     // grunt-modernizr
     modernizr: {
       test: {
-        'dest' : 'www-test/assets/scripts/modernizr.js',
-        'devFile': 'www-src/assets/scripts/modernizr-dev.js',
-        'parseFiles': true,
+        'dest': 'www-test/assets/scripts/modernizr.js',
+        'devFile': false,
         'customTests': [],
-        'tests': [
-          'flexbox'
-        ],
+        'tests': [],
         'excludeTests': [
           'hidden'
         ],
         'options': [
           'setClasses',
         ],
-        'uglify': true,
-        'files' : {
+        'uglify': false,
+        'parseFiles': true,
+        'files': {
           'src': [
             'www-src/assets/**/*.{js,css,scss}',
           ]
         }
       },
       dist: {
-        'dest' : 'www-dist/assets/scripts/modernizr.js',
-        'devFile': 'www-src/assets/scripts/modernizr-dev.js',
-        'parseFiles': true,
+        'dest': 'www-dist/assets/scripts/modernizr.js',
+        'devFile': false,
         'customTests': [],
         'tests': [],
         'excludeTests': [
@@ -317,16 +312,12 @@ module.exports = function(grunt) {
           'setClasses'
         ],
         'uglify': true,
-        'files' : {
+        'parseFiles': true,
+        'files': {
           'src': [
             'www-src/assets/**/*.{js,css,scss}',
           ]
         }
-      }
-    },
-    // grunt-bower-task
-    bower: {
-      install: {
       }
     },
     // grunt-sync
@@ -353,7 +344,7 @@ module.exports = function(grunt) {
             'fonts/**', // fonts
           ],
           dest: 'www-test/assets/',
-        },{
+        }, {
           cwd: 'www-src/assets/favicons/',
           src: [
             '**'
@@ -370,7 +361,7 @@ module.exports = function(grunt) {
             'fonts/**', // fonts
           ],
           dest: 'www-dist/assets/',
-        },{
+        }, {
           cwd: 'www-src/assets/favicons/',
           src: [
             '**'
@@ -446,7 +437,6 @@ module.exports = function(grunt) {
   // fetch and glob the sass files and generates css (test and dist)
   grunt.registerTask('js-test', function() {
     grunt.task.run('browserify:test');
-    grunt.task.run('uglify:test');
   });
   grunt.registerTask('js-dist', function() {
     grunt.task.run('browserify:dist');
@@ -480,7 +470,7 @@ module.exports = function(grunt) {
     grunt.task.run('sync:app');
   });
   // Run browserSync and watch concurrently
-  grunt.registerTask('showme', ['build:test','concurrent:showme']);
+  grunt.registerTask('showme', ['build:test', 'concurrent:showme']);
   // default
   grunt.registerTask('default', ['build:test']);
 
