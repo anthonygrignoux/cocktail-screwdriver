@@ -3,6 +3,15 @@ module.exports = function(grunt) {
   // time-grunt to display tasks' execution time
   require('time-grunt')(grunt);
 
+  // jit-grunt to reduce the time loading tasks
+  require('jit-grunt')(grunt, {
+    'nunjucks': 'grunt-nunjucks-2-html',
+    'unzip': 'grunt-zip'
+  });
+
+  // node-sass
+  const sass = require('node-sass');
+
   // fetch package.json values
   var pkgJson = require('./package.json'),
   appDir = pkgJson.appDir;
@@ -13,6 +22,7 @@ module.exports = function(grunt) {
     sass: {
       test: {
         options: {
+          implementation: sass,
           sourceMap: true,
           outputStyle: 'expanded',
           require: 'susy'
@@ -24,6 +34,7 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
+          implementation: sass,
           sourceMap: false,
           outputStyle: 'compressed'
         },
