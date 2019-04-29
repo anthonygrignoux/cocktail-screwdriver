@@ -13,15 +13,17 @@ It is also **pretty outdated** so you might try and find something more recent.
 
 ## Requirements
 
-This boilerplate requires 2 dependencies installed globally:
-  - nodejs 10.x or higher: download the package on https://nodejs.org
-  - grunt-cli: npm install -g grunt-cli
+This boilerplate requires 2 dependencies installed globally:  
+
+- nodejs 10.x or higher: download the package on https://nodejs.org
+- grunt-cli: npm install -g grunt-cli
 
 [Yarn](https://yarnpkg.com) is recommended but it should work ok with [npm](https://www.npmjs.com/get-npm).
 
 ## Initialize the project
 
-First of all, edit the package.json so that these informations are present and correct:
+First of all, edit the package.json so that these informations are present and correct:  
+
  - name
  - version
  - appDir: where your distribution files will be copied if you don't use the distribution files as is (default is www-app)
@@ -45,12 +47,12 @@ npm install
 By default (for the moment) Grunt will compile files in:
 
 - **www-test** a directory meant for local debugging
-  - assets, contains all our css/sass, js and images
-  - datas contains json files that can be used to generate mock content
-  - layout contains the pages' layouts with master.njk being the only file common to all
-  - modules contains reusable pieces of the website
-  - nunjucks contains reusable macros to generate content inside modules and pages
-  - pages contains the web pages extending the layouts and including the modules. It should contain no html, only a declaration of the page's "dependencies"
+    - assets, contains all our css/sass, js and images
+    - datas contains json files that can be used to generate mock content
+    - layout contains the pages' layouts with master.njk being the only file common to all
+    - modules contains reusable pieces of the website
+    - nunjucks contains reusable macros to generate content inside modules and pages
+    - pages contains the web pages extending the layouts and including the modules. It should contain no html, only a declaration of the page's "dependencies"
 - **www-dist** where all the files will me minified and ready for an eventual delivery
 - specifically for this project it can also compile css, js and images files in an "app" directory
 
