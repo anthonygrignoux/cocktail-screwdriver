@@ -85,4 +85,8 @@ This task can be launched by hand with `grunt svgstore:sprite`
 
 ### Images
 
-Any images dropped in
+Any images dropped in `/www-src/assets/` will be minified and copied to the corresponding path in `/www-test/assets/` thanks to the task `grunt imagemin-new-test` and in `/www-dist/assets/` with `grunt imagemin-new-dist`.
+
+### Other static assets
+
+Other static assets will be copied in the test or dist directory with the `sync` task.
