@@ -227,7 +227,7 @@ module.exports = function(grunt) {
         },
       },
       img: {
-        files: ['www-src/assets/**/*.{png,jpg,gif}'],
+        files: ['www-src/assets/**/*.png', 'www-src/assets/**/*.gif', 'www-src/assets/**/*.jpg'],
         tasks: ['imagemin-new-test'],
         options: {
           spawn: true,
