@@ -58,7 +58,8 @@ By default (for the moment) Grunt will compile files in:
 
 ## Common tasks
 
-**`grunt showme`** will launch two concurrent tasks that will optimize your workflow :
+**`grunt showme`** will launch two concurrent tasks that will optimize your workflow:  
+
 - `browserSync` will create a local server so that the pages can be debugged and viewed in a browser,
 - each modification will trigger a reload of the page,
 - `watch` will poll any changes in the working files and launch the necessary tasks automatically when files are added or modified.
